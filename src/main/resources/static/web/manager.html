@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://kit.fontawesome.com/131d9c1f34.js" crossorigin="anonymous"></script>
+    <script defer src="./assets/scripts/manager.js"></script>
+    <title>Homebanking</title>
+</head>
+<body id="app">
+    <header></header>
+    <main class="d-flex">
+        <div class="left-side d-flex flex-column">
+            <form v-on:submit.prevent="" class="d-flex flex-column gap-3">
+                <template v-if="isEditing">
+                    <i @click="stopEditing()" class="fa-solid fa-xmark"></i>
+                </template>
+                <h2>Client Manager</h2>
+                {{newClientData}}
+                <label class="d-flex flex-column">
+                    First Name:
+                    <input v-model="newClientData.firstName" type="text" name="firstName" placeholder="Your name...">
+                </label>
+                <label class="d-flex flex-column">
+                    Last Name:
+                    <input v-model="newClientData.lastName" type="text" name="lastName" placeholder="Your last name...">
+                </label>
+                <label class="d-flex flex-column">
+                    E-mail:
+                    <input v-model="newClientData.email" type="email" name="email" placeholder="Your e-mail...">
+                </label>
+                <template v-if="!isEditing">
+                    <button @click="addClient()">Add Client!</button>
+                </template>
+                <template v-else>
+                    <button @click="editClient()">Edit Client</button>
+                    <button @click="deleteClient()">Delete Client</button>
+                </template>
+            </form>
+            <table>
+                <h2>Client List</h2>
+                <input class="searchBar" placeholder="Search..." v-model="searchValue" @keyup="filterTable()" type="text" name="search">
+                <thead>
+                    <tr>
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>E-mail</td>
+                        <td>Edit</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="client of clientListFiltered">
+                        <td>{{client.firstName}}</td>
+                        <td>{{client.lastName}}</td>
+                        <td>{{client.email}}</td>
+                        <td><i @click="startEditing(client)" class="fa-solid fa-pen-to-square"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="right-side">
+            <pre><code>{{data}}</code></pre> 
+        </div>
+    </main>
+    <footer></footer>
+</body>
+</html>

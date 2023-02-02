@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://kit.fontawesome.com/131d9c1f34.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script defer src="./assets/scripts/accounts.js"></script>
+    <title>Mindhub Brothers | Accounts</title>
+</head>
+<body id="app">
+    <header>
+        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+            </div>
+        </nav> -->
+        <nav class="navbar navbar-expand-md">
+              <div class="container">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler custom-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                    </ul>
+                </div>
+          </div>
+        </nav>
+        
+    </header>
+    <main>
+        <div class="title-container">
+            <h1><span class="title-word-container t-first"><span aria-hidden="true">Your</span> Your<span aria-hidden="true">Your</span></span>
+            <span class="title-word-container t-second"><span aria-hidden="true">Accounts</span> Accounts<span aria-hidden="true">Accounts</span></span>
+            </h1>
+        </div>
+        <h2>Welcome, <span>{{data.data.firstName}} {{data.data.lastName}}</span>!</h2>
+        <!-- <div class="section-container">
+            <div class="user-image-container">
+                <img class="user-image" :src="'https://robohash.org/'+hashUser" alt="user avatar">
+            </div>
+            <h3 v-if="accounts.length!=0">Account number: {{accounts[0].number}}</h3>
+        </div> -->
+        <div id="carouselAccount" class="carousel slide carousel-accounts" data-bs-ride="carousel">
+            <div class="user-image-container">
+                <img class="user-image" :src="'https://robohash.org/'+hashUser" alt="user avatar">
+            </div>
+            <div class="carousel-wrapper top-wrapper">
+            </div>
+            <div class="carousel-inner">
+                    <div v-if="accounts.length!=0" v-for="(account,index) of accounts" :class="index==0?'carousel-item active':
+                    'carousel-item'">
+                    <!-- <div v-if="accounts.length!=0" v-for="(account,index) of accounts" class="carousel-item active"> -->
+                        <div class="section-container">
+                            <div class="stats-container">
+                                <p><span>Balance: </span>{{account.balance}}{{activeData(account)}}</p>
+                                <div>
+                                    <p class="account-number"><span>Account number: </span>{{account.number}}</p>
+                                    <p><span>Active since: </span>{{parseDate(account.creationDate)}}</p>
+                                </div>
+                                <h5>Work in progress</h5>
+                                <button><a :href="'account.html?id='+account.id">Account Details</a></button>
+                            </div>
+                            <div :id="'chart'+index"></div>
+                            {{loadCharts('chart'+index)}}
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="section-container">
+                            <h3>Add new Account</h3>
+                            <h6>Work in progress :S</h6>
+                        </div>
+                    </div>
+                    
+            </div>
+            <div class="carousel-wrapper bottom-wrapper"></div>
+            <button class="carousel-control-prev account-carousel-prev carousel-control" type="button" data-bs-target="#carouselAccount" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon carousel-icon" aria-hidden="true">&lt;</span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next account-carousel-next carousel-control" type="button" data-bs-target="#carouselAccount" data-bs-slide="next">
+                <span class="carousel-control-next-icon carousel-icon" aria-hidden="true">&gt;</span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+    </main>
+    <footer></footer>
+</body>
+</html>
