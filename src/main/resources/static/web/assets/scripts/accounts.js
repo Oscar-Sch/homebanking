@@ -14,9 +14,7 @@ createApp({
         this.loadData();
     },
     mounted(){
-        // for ((acc,ind) of this.accounts){
-        //     this.loadCharts(`char${ind}`)
-        // }
+        this.asd();
         // console.log(this.accounts)
     },
     updated(){
@@ -24,6 +22,12 @@ createApp({
         // this.loadCharts("chart0");
     },
     methods:{
+        asd(){
+            this.accounts.forEach((element,ind) => {
+                this.loadCharts(`chart${ind}`)  
+                console.log(ind)  
+            });
+        },
         loadData(){
             axios.get(`http://localhost:8080/api/clients/${this.clientId}`)
             .then(res=>{
@@ -61,21 +65,32 @@ createApp({
                 }
               }
             //   console.log(options)
-              let dir=document.querySelectorAll(`#carousel-item`);
+              let dir=document.querySelector(`#${id}`);
+              console.log(dir)
             //   if (dir){
-            //       var chart = new ApexCharts(dir, options);
-            //       chart.render();
+                  var chart = new ApexCharts(dir, options);
+                  chart.render();
             // //   }
             // console.log(dir)
               
         },
-        hello(str){
-            // console.log(str)
+        openNav() {
+            let container=document.querySelector(".lateral-navigation-subcontainer");
+            if (!container.style.minWidth||container.style.minWidth=="3rem"){
+                container.style.minWidth = "300px";
+            }else{
+                container.style.minWidth = "3rem";
+            }
         },
+        lastTransactionDate(transactions){
+            let date= transactions.sort((a,b)=>b.id-a.id)[0].date.split("T");
+            return `${date[0]} ${date[1].split(".")[0]}`
+        }
     },
     computed:{
         hashUser(){
             return this.data.data.firstName[0]+this.data.data.lastName[0]+this.data.data.email;
-        }
+        },
+        
     }
 }).mount('#app')

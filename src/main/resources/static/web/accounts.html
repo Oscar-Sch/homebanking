@@ -54,18 +54,34 @@
         
     </header>
     <main>
+        <div class="main-content-container d-flex">
+            <div class="lateral-navigation-container">
+                <div class="lateral-navigation-subcontainer">
+                    <nav class="sidenav">
+                        <ul>
+                            <li><a href="">
+                                <span v-if="data"><img :src="'https://robohash.org/'+hashUser" class="user-image"></span>
+                                <span v-else><i class="fa-solid fa-user"></i></span>
+                                {{data.data.firstName}} {{data.data.lastName}}</a></li>
+                            <div>
+                            <li><a href="#"><span><i class="fa-solid fa-house"></i></span>HOME</a></li>
+                            <li><a href="#"><span><i class="fa-solid fa-wallet"></i></span>ACCOUNTS</a></li>
+                            <li><a href="#"><span><i class="fa-solid fa-money-bill-transfer"></i></span>MOVEMENTS</a></li>
+                            <li><a href="#"><span><i class="fa-solid fa-coins"></i></span>LOANS</a></li>
+                            <li><a href="#"><span><i class="fa-solid fa-credit-card"></i></span>CARDS</a></li>
+                            </div>
+                        </ul>
+                    </nav>
+                    <span @click="openNav()">Menu</span>
+                </div>
+            </div>
+        <div class="main-content-subcontainer">
         <div class="title-container">
-            <h1><span class="title-word-container t-first"><span aria-hidden="true">Your</span> Your<span aria-hidden="true">Your</span></span>
+            <h1 class="title-header"><span class="title-word-container t-first"><span aria-hidden="true">Your</span> Your<span aria-hidden="true">Your</span></span>
             <span class="title-word-container t-second"><span aria-hidden="true">Accounts</span> Accounts<span aria-hidden="true">Accounts</span></span>
             </h1>
         </div>
         <h2>Welcome, <span>{{data.data.firstName}} {{data.data.lastName}}</span>!</h2>
-        <!-- <div class="section-container">
-            <div class="user-image-container">
-                <img class="user-image" :src="'https://robohash.org/'+hashUser" alt="user avatar">
-            </div>
-            <h3 v-if="accounts.length!=0">Account number: {{accounts[0].number}}</h3>
-        </div> -->
         <div id="carouselAccount" class="carousel slide carousel-accounts" data-bs-ride="carousel">
             <div class="user-image-container">
                 <img class="user-image" :src="'https://robohash.org/'+hashUser" alt="user avatar">
@@ -75,19 +91,20 @@
             <div class="carousel-inner">
                     <div v-if="accounts.length!=0" v-for="(account,index) of accounts" :class="index==0?'carousel-item active':
                     'carousel-item'">
-                    <!-- <div v-if="accounts.length!=0" v-for="(account,index) of accounts" class="carousel-item active"> -->
+                    <!-- <div v-if="accounts.length!=0" v-for="(account,index) of accounts"> -->
                         <div class="section-container">
                             <div class="stats-container">
                                 <p><span>Balance: </span>{{account.balance}}{{activeData(account)}}</p>
                                 <div>
                                     <p class="account-number"><span>Account number: </span>{{account.number}}</p>
                                     <p><span>Active since: </span>{{parseDate(account.creationDate)}}</p>
+                                    <p v-if="account.transactions.length>0"><span>Last transaction: </span>{{lastTransactionDate(account.transactions)}}</p>
                                 </div>
                                 <h5>Work in progress</h5>
                                 <button><a :href="'account.html?id='+account.id">Account Details</a></button>
                             </div>
                             <div :id="'chart'+index"></div>
-                            {{loadCharts('chart'+index)}}
+                            <!-- {{loadCharts('chart'+index)}} -->
                         </div>
                     </div>
                     <div class="carousel-item">
@@ -108,7 +125,8 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-
+        </div>
+        </div>
     </main>
     <footer></footer>
 </body>

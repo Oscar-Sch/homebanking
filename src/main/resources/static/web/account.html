@@ -37,6 +37,33 @@
         </nav>
     </header>
     <main>
+        <div class="main-content-container d-flex">
+            <div class="lateral-navigation-container">
+                <div class="lateral-navigation-subcontainer">
+                    <nav class="sidenav">
+                        <ul>
+                            <li><a href="">
+                                <span v-if="data"><img :src="'https://robohash.org/'+hashUser" class="user-image"></span>
+                                <span v-else><i class="fa-solid fa-user"></i></span>
+                                {{data.data.firstName}} {{data.data.lastName}}</a></li>
+                            <div>
+                            <li><a href="#"><span><i class="fa-solid fa-house"></i></span>HOME</a></li>
+                            <li><a href="#"><span><i class="fa-solid fa-wallet"></i></span>ACCOUNTS</a></li>
+                            <li><a href="#"><span><i class="fa-solid fa-money-bill-transfer"></i></span>MOVEMENTS</a></li>
+                            <li><a href="#"><span><i class="fa-solid fa-coins"></i></span>LOANS</a></li>
+                            <li><a href="#"><span><i class="fa-solid fa-credit-card"></i></span>CARDS</a></li>
+                            </div>
+                        </ul>
+                    </nav>
+                    <span @click="openNav()">Menu</span>
+                </div>
+            </div>
+        <div class="main-content-subcontainer">
+        <div class="title-container">
+            <h1>
+            <span class="title-word-container t-second"><span aria-hidden="true">Movements</span> Movements<span aria-hidden="true">Movements</span></span>
+            </h1>
+        </div>
         <table class="transactions-table">
             <thead>
                 <tr>
@@ -55,6 +82,8 @@
                 </tr>
             </tbody>
         </table>
+        </div>
+        </div>
     </main>
 </body>
 </html>
