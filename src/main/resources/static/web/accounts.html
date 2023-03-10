@@ -33,7 +33,7 @@
             </div>
         </nav> -->
         <nav class="navbar navbar-expand-md">
-              <div class="container">
+            <div class="container">
                 <a class="navbar-brand" href="#">Navbar</a>
                 <button class="navbar-toggler custom-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -49,9 +49,8 @@
                         </li>
                     </ul>
                 </div>
-          </div>
-        </nav>
-        
+            </div>
+        </nav>        
     </header>
     <main>
         <div class="main-content-container d-flex">
@@ -82,7 +81,7 @@
             </h1>
         </div>
         <h2>Welcome, <span>{{data.data.firstName}} {{data.data.lastName}}</span>!</h2>
-        <div id="carouselAccount" class="carousel slide carousel-accounts" data-bs-ride="carousel">
+        <!-- <div id="carouselAccount" class="carousel slide carousel-accounts" data-bs-ride="carousel">
             <div class="user-image-container">
                 <img class="user-image" :src="'https://robohash.org/'+hashUser" alt="user avatar">
             </div>
@@ -91,7 +90,6 @@
             <div class="carousel-inner">
                     <div v-if="accounts.length!=0" v-for="(account,index) of accounts" :class="index==0?'carousel-item active':
                     'carousel-item'">
-                    <!-- <div v-if="accounts.length!=0" v-for="(account,index) of accounts"> -->
                         <div class="section-container">
                             <div class="stats-container">
                                 <p><span>Balance: </span>{{account.balance}}{{activeData(account)}}</p>
@@ -104,7 +102,105 @@
                                 <button><a :href="'account.html?id='+account.id">Account Details</a></button>
                             </div>
                             <div :id="'chart'+index"></div>
-                            <!-- {{loadCharts('chart'+index)}} -->
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="section-container">
+                            <h3>Add new Account</h3>
+                            <h6>Work in progress :S</h6>
+                        </div>
+                    </div>
+                    
+            </div>
+            <div class="carousel-wrapper bottom-wrapper"></div>
+            <button class="carousel-control-prev account-carousel-prev carousel-control" type="button" data-bs-target="#carouselAccount" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon carousel-icon" aria-hidden="true">&lt;</span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next account-carousel-next carousel-control" type="button" data-bs-target="#carouselAccount" data-bs-slide="next">
+                <span class="carousel-control-next-icon carousel-icon" aria-hidden="true">&gt;</span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div> -->
+        <div id="carouselAccount" class="carousel slide carousel-accounts" data-bs-ride="carousel">
+            <span></span>
+            <span></span>
+            <div class="hex-border"></div>
+            <div class="hex-shadow"></div>
+            <div class="user-image-container">
+                <img class="user-image" :src="'https://robohash.org/'+hashUser" alt="user avatar">
+            </div>
+            <div class="carousel-wrapper top-wrapper">
+            </div>
+            <div class="carousel-inner">
+                    <div v-if="accounts.length!=0" v-for="(account,index) of accounts.sort((a,b)=>b.id-a.id)" :class="index==0?'carousel-item active':
+                    'carousel-item'">
+                        <div class="section-container">
+                            <div class="stats-container">
+                                <div class="account-stats">
+                                    <p class="account-number"><span>Account number: </span>{{account.number}}</p>
+                                    <div>
+                                        <p><span>Balance: </span>{{formatCurrency(account.balance)}}</p>
+                                        <p><span>Active since: </span>{{parseDate(account.creationDate)}}</p>
+                                    </div>
+                                </div>
+                                <div class="account-details-stats">
+                                    <div class="account-details-stats_transactions">
+                                        <div>
+                                            <h4>Last Movements</h4>
+                                        <template v-if="account.transactions.length">
+                                            <table class="last-transactions-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Type</th>
+                                                        <th>Amount</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="transaction of account.transactions" :class="transactionClass(transaction.type)+'-last'">
+                                                        <td>{{transaction.type}}</td>
+                                                        <td>{{(transaction.type=="CREDIT"?"+":"-") + formatCurrency(transaction.amount)}}</td>
+                                                        <td>{{transaction.date.split("T")[0]}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <button class="stat-button"><a :href="'account.html?id='+account.id">See Movements</a></button>
+                                        </template>
+                                        <template v-else>
+                                            <h5 class="no-transactions">No recent transactions</h5>
+                                        </template>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="account-details-stats_loans">
+                                        <h4>Recent Loans</h4>
+                                        <template v-if="data.data.loans.length">
+                                        <table class="loans-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Amount</th>
+                                                    <th>Payments</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="loan of loans">
+                                                    <td>{{loan.name}}</td>
+                                                    <td>{{formatCurrency(loan.amount)}}</td>
+                                                    <td>{{loan.payments}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </template>
+                                    <template v-else>
+                                        <h5 class="no-transactions">No recent Loans</h5>
+                                    </template>
+                                    <button class="stat-button"><a href="#">See Loans</a></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div :id="'chart'+index"></div> -->
                         </div>
                     </div>
                     <div class="carousel-item">
@@ -125,7 +221,7 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        </div>
+        </div>  
         </div>
     </main>
     <footer></footer>
