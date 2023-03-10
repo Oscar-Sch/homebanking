@@ -4,7 +4,8 @@ createApp({
     data() {
         return {
             data:null,
-            transactions:[],
+            cardType:"",
+            cardColor:"",
         }
     },
     created(){
@@ -12,22 +13,14 @@ createApp({
     },
     methods:{
         loadData(){
-            let id= new URLSearchParams(location.search).get("id");
-            axios.get(`http://localhost:8080/api/accounts/${id}`)
+            axios.get(`http://localhost:8080/api/clients/current`)
             .then(res=>{
                 this.data=res;
-                this.transactions=res.data.transactions.sort((a,b)=>{
-                    return b.id-a.id;
-                });
+                this.openCarousel();
                 // this.loadCharts();
             })
         },
-        transactionClass(type){
-            console.log(type)
-            return `transaction-row ${type=="CREDIT"?"CREDIT":"DEBIT"}`
-        },
         openNav() {
-            console.log("hola")
             let container=document.querySelector(".lateral-navigation-subcontainer");
             if (window.innerWidth>768){
                 if (!container.style.minWidth||container.style.minWidth=="3rem"){
@@ -43,5 +36,27 @@ createApp({
                 }
             }
         },
+        sesionLogout(){
+            axios.post('/api/logout').then(response => {
+                console.log('signed out!!!')
+                window.location.href = '/web/index.html';
+            })
+            
+        },
+        createCard(){
+            axios.post("/api/clients/current/cards",`cardType=${this.cardType}&cardColor=${this.cardColor}`)
+            .then(res=>{
+                console.log("Card Created")
+            })
+            .catch(err=>{
+                console.error(err.message)
+            })
+        },
+    },
+    computed:{
+        hashUser(){
+            return this.data.data.firstName[0]+this.data.data.lastName[0]+this.data.data.email;
+        },
+        
     }
 }).mount('#app')

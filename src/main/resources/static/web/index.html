@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ultra&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link rel="stylesheet" href="./assets/styles/cards.css">
+    <link rel="stylesheet" href="./assets/styles/index.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://kit.fontawesome.com/131d9c1f34.js" crossorigin="anonymous"></script>
+    <script defer src="./assets/scripts/index.js"></script>
+    <title>MindHub Brothers | Home</title>
+</head>
+<body id="app">
+    <header>
+        <!-- <nav class="navbar navbar-expand-md">
+            <div class="container">
+                <img src="./assets/images/mhb-logo.svg" alt="">
+                <button class="navbar-toggler custom-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>  -->
+    </header>
+    <main>
+        <div class="hero-section">
+                <svg class="hero-svg" width="543.74mm" height="52.945mm" version="1.1" viewBox="0 0 543.74 52.945" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(159.53 -109.73)">
+                    <path class="hero-circuit" d="m-159.03 116.89h36.227l9.2098 9.2098h50.289l26.177 26.177h19.108l18.017-18.017h50.413l24.031-24.031h58.51l12.277 12.277h18.285l21.811 21.811h24.673l11.694-11.694h31.677l29.552 29.552h35.489l15.394-15.394h49.908" fill="none" stroke="#eb04db" stroke-linecap="round" stroke-linejoin="round" style="paint-order:markers stroke fill"/>
+                    </g>
+                </svg>
+                <svg class="hero-svg" width="543.74mm" height="52.945mm" version="1.1" viewBox="0 0 543.74 52.945" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(159.53 -109.73)">
+                    <path class="hero-circuit" d="m-159.03 116.89h36.227l9.2098 9.2098h50.289l26.177 26.177h19.108l18.017-18.017h50.413l24.031-24.031h58.51l12.277 12.277h18.285l21.811 21.811h24.673l11.694-11.694h31.677l29.552 29.552h35.489l15.394-15.394h49.908" fill="none" stroke="#ff95f8" stroke-linecap="round" stroke-linejoin="round" style="paint-order:markers stroke fill"/>
+                    </g>
+                </svg>
+            <div class="hero-background">
+                <div class="hexagon-container hex1">
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                </div>
+                <div class="hexagon-container">
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                </div>
+                <div class="hexagon-container">
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                    <div class="hexagon"></div>
+                </div>
+            </div>
+            <div class="title-section">
+                <div class="title-container-home">
+                    <h1><span class="title-word-container-home t-first-home"><span aria-hidden="true">MindHub</span> MindHub<span aria-hidden="true">MindHub</span></span>
+                    <span class="title-word-container-home t-second-home"><span aria-hidden="true">BrotherS</span> BrotherS<span aria-hidden="true">BrotherS</span></span>
+                    </h1>
+                </div>
+                <h2 class="hero-subtitle">The bank of the future, today.</h2>
+                <button type="button" class="singin-button" data-bs-toggle="modal" data-bs-target="#modalLogin" @click="singIn()">
+                    Sing in!
+                </button>
+            </div>
+        </div>
+        <!-- <button @click="sesionLogin()">Login!</button>
+        <button @click="sesionLogout()">Logout!</button> -->
+        <div class="home-section">
+            <div class="message-pad">
+                <div class="message-pad-hardware">
+                    <div class="message-pad_charge-bar-counterpart"></div>
+                    <div class="message-pad_charge-bar-mark"></div>
+                    <div class="message-pad_charge-bar"></div>
+                    <div class="message-pad-hardware_mid">
+                        <div class="message-pad_light-container">
+                            <span class="message-pad-light left-light"></span>
+                            <span class="message-pad-light top-light"></span>
+                            <span class="message-pad-light right-light"></span>
+                            <span class="message-pad-light bottom-light"></span>
+                        </div>
+                        <div class="message-pad-hardware_inner"></div>
+                    </div>
+                </div>
+                <div class="message-pad-hardware_arm-container">
+                    <div class="message-pad-hardware_arm">
+                        <div class="display message-pad-display"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="message-pad message-pad-right">
+                <div class="message-pad-hardware">
+                    <div class="message-pad_charge-bar-counterpart"></div>
+                    <div class="message-pad_charge-bar-mark"></div>
+                    <div class="message-pad_charge-bar message-pad_charge-bar-right"></div>
+                    <div class="message-pad-hardware_mid">
+                        <div class="message-pad_light-container message-pad_light-container-right">
+                            <span class="message-pad-light left-light"></span>
+                            <span class="message-pad-light top-light"></span>
+                            <span class="message-pad-light right-light"></span>
+                            <span class="message-pad-light bottom-light"></span>
+                        </div>
+                        <div class="message-pad-hardware_inner"></div>
+                    </div>
+                </div>
+                <div class="message-pad-hardware_arm-container message-pad-hardware_arm-container-right">
+                    <div class="message-pad-hardware_arm message-pad-hardware_arm-right">
+                        <div class="display message-pad-display message-pad-display-right"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="message-pad">
+                <div class="message-pad-hardware">
+                    <div class="message-pad_charge-bar-counterpart"></div>
+                    <div class="message-pad_charge-bar-mark"></div>
+                    <div class="message-pad_charge-bar"></div>
+                    <div class="message-pad-hardware_mid">
+                        <div class="message-pad_light-container">
+                            <span class="message-pad-light left-light"></span>
+                            <span class="message-pad-light top-light"></span>
+                            <span class="message-pad-light right-light"></span>
+                            <span class="message-pad-light bottom-light"></span>
+                        </div>
+                        <div class="message-pad-hardware_inner"></div>
+                    </div>
+                </div>
+                <div class="message-pad-hardware_arm-container">
+                    <div class="message-pad-hardware_arm">
+                        <div class="display message-pad-display"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="message-pad message-pad-right">
+                <div class="message-pad-hardware">
+                    <div class="message-pad_charge-bar-counterpart"></div>
+                    <div class="message-pad_charge-bar-mark"></div>
+                    <div class="message-pad_charge-bar message-pad_charge-bar-right"></div>
+                    <div class="message-pad-hardware_mid">
+                        <div class="message-pad_light-container message-pad_light-container-right">
+                            <span class="message-pad-light left-light"></span>
+                            <span class="message-pad-light top-light"></span>
+                            <span class="message-pad-light right-light"></span>
+                            <span class="message-pad-light bottom-light"></span>
+                        </div>
+                        <div class="message-pad-hardware_inner"></div>
+                    </div>
+                </div>
+                <div class="message-pad-hardware_arm-container message-pad-hardware_arm-container-right">
+                    <div class="message-pad-hardware_arm message-pad-hardware_arm-right">
+                        <div class="display message-pad-display message-pad-display-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="modal fade" id="modalLogin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered login-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header card-pad_top">
+                            <button type="button" class="close-modal" data-bs-dismiss="modal" aria-label="Close" @click="singUpTransitionClear()"><i class="fa-sharp fa-solid fa-xmark fa-2xl"></i></button>
+                    </div>
+                    <div class="display modal-body">
+                        <div class="overflow-container">
+                            <div class="login-register-container">
+                                <div class="login-container">
+                                    <h3>Login</h3>
+                                    <div>
+                                        <label>
+                                            <span>User:</span>
+                                            <input type="email" name="email" v-model="email" placeholder="melba@mindhub.com">
+                                            <!-- <span class="login-error-msg"></span> -->
+                                        </label>
+                                        <label>
+                                            <span>Password:</span>
+                                            <input type="password" name="password" v-model="password" placeholder="asd95321">
+                                            <!-- <span class="login-error-msg"></span> -->
+                                        </label>
+                                        <a href="#">Forgot your password?</a>
+                                        <p class="login-error-msg" v-show="loginErrMsg">{{loginErrMsg}}</p>
+                                    </div>
+                                    <template v-if="email && password">
+                                        <button class="btn-signIn" @click="sesionLogin(email,password)">Sign In!</button>
+                                    </template>
+                                    <template v-else>
+                                        <button disabled class="btn-signIn">Sign In!</button>
+                                    </template>
+                                    <div>
+                                        <p>Don't you have an account?</p>
+                                        <button class="btn-signUp" @click="singUpTransition()">Sign Up!</button>
+                                    </div>
+                                </div>
+                                <div class="register-container">
+                                    <h3>Register</h3>
+                                    <div>
+                                        <div>
+                                            <label class="register-name">
+                                                <span>Name:</span>
+                                                <input type="text" name="name" v-model="registerName" placeholder="Your names">
+                                                <!-- <span class="register-error-msg"></span> -->
+                                            </label>
+                                            <label class="register-lastName">
+                                                <span>Last Name:</span>
+                                                <input type="text" name="lastName" v-model="registerLastName">
+                                                <!-- <span class="register-error-msg"></span> -->
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label class="register-userName">
+                                                <span>Username:</span>
+                                                <input type="text" name="username" v-model="registerUserName">
+                                                <!-- <span class="register-error-msg"></span> -->
+                                            </label>
+                                            <label class="register-email">
+                                                <span>E-mail:</span>
+                                                <input type="email" name="email" v-model="registerEmail">
+                                                <!-- <span class="register-error-msg"></span> -->
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label class="register-phoneNumber">
+                                                <span>Phone number:</span>
+                                                <input type="tel" name="phone" v-model="registerPhoneNumber">
+                                                <!-- <span class="register-error-msg"></span> -->
+                                            </label>
+                                            <label class="register-password">
+                                                <span>Password:</span>
+                                                <input type="text" name="password" v-model="registerPassword">
+                                                <!-- <span class="register-error-msg"></span> -->
+                                            </label>
+                                        </div>
+                                        <p class="register-error-msg" v-show="registerErrMsg">{{registerErrMsg}}</p>
+                                    </div>
+                                    <template v-if="registerName && registerLastName && registerEmail && registerPassword && registerUserName && registerPhoneNumber">
+                                        <button class="btn-signUp" @click="sesionRegister()">Sign Up!</button>
+                                    </template>
+                                    <template v-else>
+                                        <button disabled class="btn-signUp">Sing Up!</button>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer card-pad_bot">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    
+</body>
+</html>

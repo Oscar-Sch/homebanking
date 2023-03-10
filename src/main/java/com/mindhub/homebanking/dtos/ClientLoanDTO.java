@@ -21,7 +21,7 @@ public class ClientLoanDTO {
         return id;
     }
 
-    public long getLoaId() {
+    public long getLoanId() {
         return loanId;
     }
 

@@ -11,8 +11,8 @@
     <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://kit.fontawesome.com/131d9c1f34.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script defer src="./assets/scripts/account.js"></script>
-    <title>Mindhub Brothers | Transactions</title>
+    <script defer src="./assets/scripts/create-card.js"></script>
+    <title>Mindhub Brothers | Create Cards</title>
 </head>
 <body id="app">
     <header>
@@ -30,7 +30,7 @@
                         <li class="nav-item"><a href="./transactions.html">MOVEMENTS</a></li>
                         <li class="nav-item"><a href="#">LOANS</a></li>
                         <li class="nav-item"><a href="./cards.html">CARDS</a></li>
-                        <li class="nav-item"><a href="./create-cards.html">NEW CARDS</a></li>
+                        <li class="nav-item"><a href="#">NEW CARDS</a></li>
                         <li class="nav-item"><a href="" data-bs-toggle="modal" data-bs-target="#modalLogin">LOGOUT</a></li>
                     </ul>
                 </div>
@@ -43,47 +43,44 @@
                 <div class="lateral-navigation-subcontainer">
                     <nav class="sidenav">
                         <ul>
-                            <li><a href="">
+                            <li><a href="" class="sidenav-user">
                                 <span v-if="data"><img :src="'https://robohash.org/'+hashUser" class="user-image"></span>
                                 <span v-else><i class="fa-solid fa-user"></i></span>
-                                {{data.data.firstName}} {{data.data.lastName}}</a></li>
+                                <span>{{data.data.firstName}} {{data.data.lastName}}</span></a></li>
+                                <!-- <button @click="sesionLogout()">Logout!</button> -->
                             <div>
-                            <li><a href="#"><span><i class="fa-solid fa-house"></i></span>HOME</a></li>
-                            <li><a href="./accounts.html"><span><i class="fa-solid fa-wallet"></i></span>ACCOUNTS</a></li>
-                            <li><a href="#"><span><i class="fa-solid fa-money-bill-transfer"></i></span>MOVEMENTS</a></li>
-                            <li><a href="#"><span><i class="fa-solid fa-coins"></i></span>LOANS</a></li>
-                            <li><a href="./cards.html"><span><i class="fa-solid fa-credit-card"></i></span>CARDS</a></li>
+                            <li><a href="#"><span class="sidenav-icon-span"><i class="fa-solid fa-house fa-lg"></i></span><span>HOME</span></a></li>
+                            <li><a href="./accounts.html"><span class="sidenav-icon-span"><i class="fa-solid fa-wallet fa-lg"></i></span><span>ACCOUNTS</span></a></li>
+                            <li><a href="./transactions.html"><span class="sidenav-icon-span"><i class="fa-solid fa-money-bill-transfer fa-lg"></i></span><span>MOVEMENTS</span></a></li>
+                            <li><a href="#"><span class="sidenav-icon-span"><i class="fa-solid fa-coins fa-lg"></i></span><span>LOANS</span></a></li>
+                            <li><a href="./cards.html"><span class="sidenav-icon-span"><i class="fa-solid fa-credit-card fa-lg"></i></span><span>CARDS</span></a></li>
+                            <li><a href="#"><span class="sidenav-icon-span"><i class="fa-solid fa-credit-card fa-lg"></i></span><span>NEW CARDS</span></a></li>
                             </div>
+                            <li><a href="" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="sidenav-icon-span"><i class="fa-solid fa-right-from-bracket fa-lg"></i></span><span>LOGOUT</span></a></li>
                         </ul>
                     </nav>
                     <span @click="openNav()">Menu</span>
                 </div>
             </div>
-        <div class="main-content-subcontainer">
-        <div class="title-container">
-            <h1>
-            <span class="title-word-container t-second"><span aria-hidden="true">Movements</span> Movements<span aria-hidden="true">Movements</span></span>
-            </h1>
-        </div>
-        <table class="transactions-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody v-if="transactions.length>0">
-                <tr v-for="transaction of transactions" :class="transactionClass(transaction.type)">
-                    <td>{{transaction.id}}</td>
-                    <td>{{transaction.type}}</td>
-                    <td>{{(transaction.type=="CREDIT"?"+":"-") + transaction.amount}}</td>
-                    <td>{{transaction.date}}</td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
+            <div class="main-content-subcontainer">
+                <div class="title-container">
+                    <h1 class="title-header"><span class="title-word-container t-first"><span aria-hidden="true">New</span> New<span aria-hidden="true">New</span></span>
+                    <span class="title-word-container t-second"><span aria-hidden="true">Cards</span> Cards<span aria-hidden="true">Cards</span></span>
+                    </h1>
+                </div>
+                <div class="new-card-form">
+                    <select name="card-type" v-model="cardType">
+                        <option value="CREDIT">Credit</option>
+                        <option value="DEBIT">Debit</option>
+                    </select>
+                    <select name="card-color" v-model="cardColor">
+                        <option value="SILVER">Silver</option>
+                        <option value="GOLD">Gold</option>
+                        <option value="TITANIUM">Titanium</option>
+                    </select>
+                    <button @click="createCard()">CREATE</button>
+                </div>
+            </div>  
         </div>
         <div class="modal fade" id="modalLogin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered login-modal" role="document">
@@ -108,5 +105,6 @@
             </div>
         </div>
     </main>
+    <footer></footer>
 </body>
 </html>

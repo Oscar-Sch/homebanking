@@ -14,16 +14,21 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
-    private String firstName,lastName,email;
+    private String firstName,lastName,email,password,userName,phoneNumber;
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     Set<Account> accounts = new HashSet<>();
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     Set<ClientLoan> clientLoans= new HashSet<>();
+    @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
+    Set<Card> cards= new HashSet<>();
     public Client(){}
-    public Client(String first, String last, String mail){
+    public Client(String first, String last, String mail, String password, String userName, String phoneNumber){
         this.firstName=first;
         this.lastName=last;
         this.email=mail;
+        this.password=password;
+        this.userName=userName;
+        this.phoneNumber=phoneNumber;
     }
 
     public String getFirstName() {
@@ -56,13 +61,12 @@ public class Client {
         return accounts;
     }
 
-    public void addAccount(Account account) {
-        account.setClient(this);
-        accounts.add(account);
+    public String getPassword() {
+        return password;
     }
-    public void addClientLoan(ClientLoan clientLoan) {
-        clientLoan.setClient(this);
-        clientLoans.add(clientLoan);
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     public List<Loan> getLoans() {
 
@@ -75,6 +79,39 @@ public class Client {
 
     public void setClientLoans(Set<ClientLoan> clientLoans) {
         this.clientLoans = clientLoans;
+    }
+
+    public Set<Card> getCards() {
+        return cards;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void addAccount(Account account) {
+        account.setClient(this);
+        accounts.add(account);
+    }
+    public void addClientLoan(ClientLoan clientLoan) {
+        clientLoan.setClient(this);
+        clientLoans.add(clientLoan);
+    }
+    public void addCard(Card card) {
+        card.setClient(this);
+        cards.add(card);
     }
 
     @Override

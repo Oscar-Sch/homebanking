@@ -30,7 +30,7 @@ createApp({
             });
         },
         loadData(){
-            axios.get(`http://localhost:8080/api/clients/${this.clientId}`)
+            axios.get(`http://localhost:8080/api/clients/current`)
             .then(res=>{
                 this.data=res;
                 this.accounts=res.data.accounts;
@@ -79,10 +79,18 @@ createApp({
         // },
         openNav() {
             let container=document.querySelector(".lateral-navigation-subcontainer");
-            if (!container.style.minWidth||container.style.minWidth=="3rem"){
-                container.style.minWidth = "300px";
+            if (window.innerWidth>768){
+                if (!container.style.minWidth||container.style.minWidth=="3rem"){
+                    container.style.minWidth = "300px";
+                }else{
+                    container.style.minWidth = "3rem";
+                }
             }else{
-                container.style.minWidth = "3rem";
+                if (!container.style.minHeight||container.style.minHeight=="3rem"){
+                    container.style.minHeight = "300px";
+                }else{
+                    container.style.minHeight = "3rem";
+                }
             }
         },
         openCarousel(){
@@ -110,7 +118,7 @@ createApp({
                         elem.style.opacity="1";
                     })
                 }, 2200);
-            }, 2000);
+            }, 100);
         },
         lastTransactionDate(transactions){
             let date= transactions.sort((a,b)=>b.id-a.id)[0].date.split("T");
@@ -125,11 +133,24 @@ createApp({
             let numberFormat = new Intl.NumberFormat('en-US', options);
             return numberFormat.format(amount);
         },
+        sesionLogout(){
+            axios.post('/api/logout').then(response => {
+                console.log('signed out!!!')
+                window.location.href = '/web/index.html';
+            })
+            
+        },
+        createAccount(){
+            axios.post("/api/clients/current/accounts")
+            .then(res=>{
+                window.location.reload()
+            })
+            .catch(err=> console.error(err.message))
+        }
     },
     computed:{
         hashUser(){
             return this.data.data.firstName[0]+this.data.data.lastName[0]+this.data.data.email;
         },
-        
     }
 }).mount('#app')
