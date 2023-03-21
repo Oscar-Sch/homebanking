@@ -1,7 +1,7 @@
 package com.mindhub.homebanking.dtos;
 
 import com.mindhub.homebanking.models.Account;
-import com.mindhub.homebanking.models.Transaction;
+import com.mindhub.homebanking.models.AccountType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,7 +12,10 @@ public class AccountDTO {
     private String number;
     private LocalDateTime creationDate;
     private double balance;
+    private AccountType type;
+    private Boolean active;
     private List<TransactionDTO> transactions;
+    private List<CoinDTO> coins;
 
     public AccountDTO() {
     }
@@ -22,38 +25,37 @@ public class AccountDTO {
         this.creationDate=account.getCreationDate();
         this.balance= account.getBalance();
         this.transactions=account.getTransactions().stream().map(TransactionDTO::new).collect(Collectors.toList());
+        this.active=account.getActive();
+        this.type=account.getType();
+        this.coins=account.getCoins().stream().map(CoinDTO::new).collect(Collectors.toList());
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getNumber() {
         return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
     }
 
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public AccountType getType() {
+        return type;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public List<CoinDTO> getCoins() {
+        return coins;
     }
 
     public List<TransactionDTO> getTransactions() {

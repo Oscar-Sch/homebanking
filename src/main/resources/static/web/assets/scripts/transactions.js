@@ -12,7 +12,8 @@ createApp({
             destinationNumber:null,
             amount:null,
             description:null,
-            registerErrMsg:"",
+            transferErrMsg:"",
+            originMoneyAccount:null,
         }
     },
     created(){
@@ -50,13 +51,13 @@ createApp({
             
         },
         transfer(){
-            this.registerErrMsg="";
+            this.transferErrMsg="";
             axios.post('/api/transactions',`amount=${this.amount}&originAccountNumber=${this.originAccount.number}&targetAccountNumber=${this.targetAccount?.number || this.destinationNumber}&description=${this.description}`)
             .then(response => {
                 window.location.reload();
             })
             .catch(err=>{
-                this.registerErrMsg=err.response.data;
+                this.transferErrMsg=err.response.data;
             })
         },
         formatCurrency(amount){
@@ -68,6 +69,7 @@ createApp({
             this.targetAccount=null;
             this.destinationNumber=null;
             this.targetAccountFetched=null;
+            this.amount="";
         },
         fetchTargetAccount(){
             if (this.destinationNumber && this.destinationNumber.length===12){

@@ -11,4 +11,5 @@ import java.util.Optional;
 @RepositoryRestResource
 public interface CardRepository extends JpaRepository<Card,Long> {
     Boolean existsCardByNumber(String number);
+    Card findByNumber(String number);
 }

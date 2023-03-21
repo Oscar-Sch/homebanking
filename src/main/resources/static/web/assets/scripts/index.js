@@ -98,7 +98,11 @@ createApp({
             msgPads.forEach(pad=>{
                 observer.observe(pad);
             })
-        }
+        },
+        calcWidth(){
+            console.log(window.innerWidth>1024)
+            return window.innerWidth>1024;
+        },
     },
     computed:{
     }

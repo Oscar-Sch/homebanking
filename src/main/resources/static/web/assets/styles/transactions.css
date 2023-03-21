@@ -249,9 +249,9 @@ textarea{
     max-height: 0;
     min-height: 0;
     overflow: hidden;
-    animation: msg-display-start 2s forwards,
-            section-open-glitch 2s forwards,
-            section-open-glitch-shadow 2s forwards !important;
+    animation: msg-display-start 3s forwards,
+            section-open-glitch 1s forwards,
+            section-open-glitch-shadow 1s forwards !important;
 }
 .modal-transfer-msg-container{
     background: #442c8877;
@@ -277,6 +277,29 @@ textarea{
 
 .modal-transfer-msg-container h3{
     text-align: center;
+}
+.transfer-busd-container{
+    background: #442c8877;
+    width: 70%;
+    min-width: 22rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+.transfer-busd-subcontainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.transfer-busd-subcontainer>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.transfer-busd-subcontainer input{
+    width: 18.5rem;
 }
 @media (max-width:1200px){
     .btn-transfer-bottom{

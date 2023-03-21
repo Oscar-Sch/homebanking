@@ -1,14 +1,16 @@
 package com.mindhub.homebanking.utils;
 
 
+import com.mindhub.homebanking.Services.CardService;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.Coin;
 import com.mindhub.homebanking.repositories.CardRepository;
 
 import java.util.regex.Pattern;
 
 public class Utilities {
 
-    static private String cardNumberGenerator(){
+    static public String cardNumberGenerator(){
         String finalNum="";
         for (byte i=0; i<4;i++){
             finalNum += String.format("%04d", (int) Math.floor(Math.random() * 9999));
@@ -18,11 +20,11 @@ public class Utilities {
         }
         return finalNum;
     }
-    static public String handleCardNumberGeneration(CardRepository cardRepository){
+    static public String handleCardNumberGeneration(CardService cardService){
         String number;
         do{
             number= cardNumberGenerator();
-        }while(cardRepository.existsCardByNumber(number));
+        }while(cardService.existsCardByNumber(number));
         return number;
     }
     static public String cardCvvGenerator(){
@@ -43,4 +45,12 @@ public class Utilities {
         Pattern pattern = Pattern.compile("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}");
         return pattern.matcher(phoneNumber).matches();
     }
+//    static public Coin getStoredCoin(Account account,String coinId){
+//        account.getCoins().forEach(coin->{
+//            if(coin.getCoinId().equals(coinId)){
+//                return coin;
+//            }
+//        });
+//        return null;
+//    }
 }

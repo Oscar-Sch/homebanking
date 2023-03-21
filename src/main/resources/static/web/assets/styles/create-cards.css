@@ -1,0 +1,22 @@
+.new-card-form{
+    width: 30rem;
+    background-color:#442c8877;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    margin: 2rem 0;
+}
+.new-card-form div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+}
+.create-card-pad{
+    max-width: 40rem !important;
+}
+.login-error-msg{
+    margin: 0 auto;
+}

@@ -10,8 +10,8 @@ public class TransactionDTO {
     private long id;
     private TransactionType type;
     private LocalDateTime date;
-    private double amount;
-    private String description;
+    private double amount,newBalance;
+    private String description,origin,destination;
 
     public TransactionDTO(){}
 
@@ -21,6 +21,9 @@ public class TransactionDTO {
         this.date=transaction.getDate();
         this.amount=transaction.getAmount();
         this.description=transaction.getDescription();
+        this.origin= transaction.getOrigin();
+        this.destination= transaction.getDestination();
+        this.newBalance= transaction.getNewBalance();
     }
 
     public long getId() {
@@ -41,5 +44,17 @@ public class TransactionDTO {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public double getNewBalance() {
+        return newBalance;
     }
 }

@@ -27,6 +27,8 @@ main{
     align-items: center;
     /* justify-content: center; */
     min-height: 100vh;
+    /* background-color: var(--darkBlue);
+    background-image: linear-gradient(160deg, var(--darkBlue) 0%, var(--violet) 100%); */
 
 }
 .hero-section{
@@ -489,7 +491,7 @@ h1{
     padding: .5rem .7rem;
     transition: all .3s;
 }
-.btn-signIn:hover{
+.btn-signIn:not(:disabled):hover{
     border-color: #98fbcf;
     color:#98fbcf;
     box-shadow: 0 0 1rem var(--green);
@@ -500,7 +502,7 @@ h1{
     border-color: var(--pink);
     color: var(--pink);
 }
-.btn-signUp:disabled{
+.btn-signUp:disabled,.btn-signIn:disabled{
     opacity: .7;
 }
 .btn-signUp:not(:disabled):hover{
@@ -592,6 +594,7 @@ h1{
     color: red;
     background-color: #0005;
     padding: 1rem 2rem;
+    text-align: center;
 }
 @keyframes register-slide {
     to{
@@ -604,7 +607,9 @@ h1{
 }
 .message-pad{
     position: relative;
-    margin: 10rem 0 20rem 0;
+    /* margin: 10rem 0 35rem 0; */
+    margin-top: 5rem;
+    margin-bottom: calc(60rem - 25dvw);
     display: flex;
     /* border: 2px solid yellow; */
 }
@@ -730,7 +735,7 @@ h1{
     left: 7.5rem;
     /* padding-left: 7.5rem; */
     width: 100%;
-    height: 35rem;
+    height: 50rem;
     /* border: 2px solid red; */
     /* transform: rotateZ(30deg); */
     overflow: hidden;
@@ -789,12 +794,37 @@ h1{
 .message-pad-display{
     width: 60%;
     min-height: 0rem;
-    max-height: 50rem;
+    max-height: 0rem;
     position: absolute;
     top: 4rem;
     left: calc(40% - 3rem);
     /* translate: 25% 0; */
     padding: 0 !important;
+    overflow: hidden;
+    transition: all 1s;
+}
+.index-msg-container{
+    width: 96%;
+    background-color: #442c8877;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+.index-msg-container h3{
+    color: #fb9df4;
+    text-shadow: 2px 0 var(--pink), -2px 0 var(--pink), 0 2px var(--pink), 0 -2px var(--pink),
+               1px 1px var(--pink), -1px -1px var(--pink), 1px -1px var(--pink), -1px 1px var(--pink);
+    font-size: 2rem;
+    text-align: center;
+}
+.index-msg-container p{
+    color: var(--green);
+    font-weight: bolder;
+    font-size: 1.3rem;
+    text-align: center;
 }
 .message-pad-display-right{
     left: auto;
@@ -807,19 +837,7 @@ h1{
 .message-pad:hover .message-pad_charge-bar::after{
     transform: rotateZ(0deg);
 }
-@keyframes jjj {
-    /* 0%{
-        min-height: 0 !important;
-        height: 0 !important;
-        max-height: 0 !important;
-    } */
-    100%{
-        /* min-height: 25rem !important;
-        height: 25rem !important;
-        max-height: 50rem !important; */
-        background-color: red;
-    }
-}
+
 @keyframes msg-pad-display-open {
     0%{
         min-height: 0 !important;
@@ -902,7 +920,7 @@ h1{
 @keyframes msg-display-start {
     to{
         min-height: 25rem;
-        max-height: 100rem;
+        max-height: 200rem;
     }
 }
 @keyframes msg-arm-start {
@@ -938,4 +956,87 @@ h1{
     animation: msg-arm-start 1s forwards;
     animation-delay: 1s;
 }
+footer {
+    background: linear-gradient(#11366b,#19509d,#11366b);
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+footer>p{
+    text-align: center;
+}
+
+.footer-container {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+.footer-text {
+    width: 15rem;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.footer-text p {
+    margin-bottom: 10px;
+}
+.footer-text ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.footer-text li {
+    margin-bottom: 5px;
+}
+.footer-logo {
+    width: 10rem;
+}
+@media (max-width:1440px) {
+    .message-pad-hardware_arm-container{
+        height: 60rem;
+    }
+    
+}
+@media (max-width:1024px) {
+    .home-section{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    .card-list-pad{
+        min-width: 20rem;
+    }
+    .hero-section{
+        align-items: center;
+    }
+    .title-section{
+        scale: .8;
+    }
+    .hero-section svg{
+        display: none;
+    }
+}
+@media (max-width:600px) {
+    .title-section{
+        scale: .6;
+    }
+    .hero-section{
+        height: 25rem;
+        padding-bottom: 3rem;
+    }
+    .footer-container{
+        justify-content: center;
+        text-align: center;
+    }
+    .footer-text{
+        margin-bottom: 1rem;
+    }
+}
+
     

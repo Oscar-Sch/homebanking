@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/styles/style.css">
     <link rel="stylesheet" href="./assets/styles/cards.css">
+    <link rel="stylesheet" href="./assets/styles/transactions.css">
     <link rel="stylesheet" href="./assets/styles/index.css">
     <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -19,27 +20,6 @@
     <title>MindHub Brothers | Home</title>
 </head>
 <body id="app">
-    <header>
-        <!-- <nav class="navbar navbar-expand-md">
-            <div class="container">
-                <img src="./assets/images/mhb-logo.svg" alt="">
-                <button class="navbar-toggler custom-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavId">
-                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>  -->
-    </header>
     <main>
         <div class="hero-section">
                 <svg class="hero-svg" width="543.74mm" height="52.945mm" version="1.1" viewBox="0 0 543.74 52.945" xmlns="http://www.w3.org/2000/svg">
@@ -102,90 +82,259 @@
         <!-- <button @click="sesionLogin()">Login!</button>
         <button @click="sesionLogout()">Logout!</button> -->
         <div class="home-section">
-            <div class="message-pad">
-                <div class="message-pad-hardware">
-                    <div class="message-pad_charge-bar-counterpart"></div>
-                    <div class="message-pad_charge-bar-mark"></div>
-                    <div class="message-pad_charge-bar"></div>
-                    <div class="message-pad-hardware_mid">
-                        <div class="message-pad_light-container">
-                            <span class="message-pad-light left-light"></span>
-                            <span class="message-pad-light top-light"></span>
-                            <span class="message-pad-light right-light"></span>
-                            <span class="message-pad-light bottom-light"></span>
+            <template v-if="calcWidth()">
+                <div class="message-pad">
+                    <div class="message-pad-hardware">
+                        <div class="message-pad_charge-bar-counterpart"></div>
+                        <div class="message-pad_charge-bar-mark"></div>
+                        <div class="message-pad_charge-bar"></div>
+                        <div class="message-pad-hardware_mid">
+                            <div class="message-pad_light-container">
+                                <span class="message-pad-light left-light"></span>
+                                <span class="message-pad-light top-light"></span>
+                                <span class="message-pad-light right-light"></span>
+                                <span class="message-pad-light bottom-light"></span>
+                            </div>
+                            <div class="message-pad-hardware_inner"></div>
                         </div>
-                        <div class="message-pad-hardware_inner"></div>
                     </div>
-                </div>
-                <div class="message-pad-hardware_arm-container">
-                    <div class="message-pad-hardware_arm">
-                        <div class="display message-pad-display"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="message-pad message-pad-right">
-                <div class="message-pad-hardware">
-                    <div class="message-pad_charge-bar-counterpart"></div>
-                    <div class="message-pad_charge-bar-mark"></div>
-                    <div class="message-pad_charge-bar message-pad_charge-bar-right"></div>
-                    <div class="message-pad-hardware_mid">
-                        <div class="message-pad_light-container message-pad_light-container-right">
-                            <span class="message-pad-light left-light"></span>
-                            <span class="message-pad-light top-light"></span>
-                            <span class="message-pad-light right-light"></span>
-                            <span class="message-pad-light bottom-light"></span>
+                    <div class="message-pad-hardware_arm-container">
+                        <div class="message-pad-hardware_arm">
+                            <div class="display message-pad-display">
+                                <div class="index-msg-container">
+                                    <h3>Trust and integrity:</h3>
+                                    <p>Our bank is committed to building and maintaining trust with our customers. We understand that our customers entrust us with their hard-earned money and sensitive personal information, and we take that responsibility seriously. That's why we adhere to the highest standards of transparency and ethical behavior, with clear policies and procedures in place to protect customer data and privacy.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="message-pad-hardware_inner"></div>
                     </div>
                 </div>
-                <div class="message-pad-hardware_arm-container message-pad-hardware_arm-container-right">
-                    <div class="message-pad-hardware_arm message-pad-hardware_arm-right">
-                        <div class="display message-pad-display message-pad-display-right"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="message-pad">
-                <div class="message-pad-hardware">
-                    <div class="message-pad_charge-bar-counterpart"></div>
-                    <div class="message-pad_charge-bar-mark"></div>
-                    <div class="message-pad_charge-bar"></div>
-                    <div class="message-pad-hardware_mid">
-                        <div class="message-pad_light-container">
-                            <span class="message-pad-light left-light"></span>
-                            <span class="message-pad-light top-light"></span>
-                            <span class="message-pad-light right-light"></span>
-                            <span class="message-pad-light bottom-light"></span>
+            </template>
+            <template v-else>
+                <div class="card-list-pad">
+                    <span></span>
+                    <span></span>
+                    <div class="card-list-pad_top pad-top"></div>
+                    <div class="display card-list-pad_display">
+                        <div class="index-msg-container">
+                            <h3>Trust and integrity:</h3>
+                            <p>Our bank is committed to building and maintaining trust with our customers. We understand that our customers entrust us with their hard-earned money and sensitive personal information, and we take that responsibility seriously. That's why we adhere to the highest standards of transparency and ethical behavior, with clear policies and procedures in place to protect customer data and privacy.</p>
                         </div>
-                        <div class="message-pad-hardware_inner"></div>
                     </div>
+                    <div class="card-list-pad_bot pad-bot"></div>
                 </div>
-                <div class="message-pad-hardware_arm-container">
-                    <div class="message-pad-hardware_arm">
-                        <div class="display message-pad-display"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="message-pad message-pad-right">
-                <div class="message-pad-hardware">
-                    <div class="message-pad_charge-bar-counterpart"></div>
-                    <div class="message-pad_charge-bar-mark"></div>
-                    <div class="message-pad_charge-bar message-pad_charge-bar-right"></div>
-                    <div class="message-pad-hardware_mid">
-                        <div class="message-pad_light-container message-pad_light-container-right">
-                            <span class="message-pad-light left-light"></span>
-                            <span class="message-pad-light top-light"></span>
-                            <span class="message-pad-light right-light"></span>
-                            <span class="message-pad-light bottom-light"></span>
+            </template>
+            <template v-if="calcWidth()">
+                <div class="message-pad message-pad-right">
+                    <div class="message-pad-hardware">
+                        <div class="message-pad_charge-bar-counterpart"></div>
+                        <div class="message-pad_charge-bar-mark"></div>
+                        <div class="message-pad_charge-bar message-pad_charge-bar-right"></div>
+                        <div class="message-pad-hardware_mid">
+                            <div class="message-pad_light-container message-pad_light-container-right">
+                                <span class="message-pad-light left-light"></span>
+                                <span class="message-pad-light top-light"></span>
+                                <span class="message-pad-light right-light"></span>
+                                <span class="message-pad-light bottom-light"></span>
+                            </div>
+                            <div class="message-pad-hardware_inner"></div>
                         </div>
-                        <div class="message-pad-hardware_inner"></div>
+                    </div>
+                    <div class="message-pad-hardware_arm-container message-pad-hardware_arm-container-right">
+                        <div class="message-pad-hardware_arm message-pad-hardware_arm-right">
+                            <div class="display message-pad-display message-pad-display-right">
+                                <div class="index-msg-container">
+                                    <h3>Exceptional customer service:</h3>
+                                    <p>Our knowledgeable and friendly staff are here to help you with all of your banking needs. Whether you have a question about your account, need assistance with a transaction, or are looking for advice on a financial matter, we're always here to help. We believe that exceptional customer service is the cornerstone of our business, and we're committed to providing the best possible experience for our customers.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="message-pad-hardware_arm-container message-pad-hardware_arm-container-right">
-                    <div class="message-pad-hardware_arm message-pad-hardware_arm-right">
-                        <div class="display message-pad-display message-pad-display-right"></div>
+            </template>
+            <template v-else>
+                <div class="card-list-pad">
+                    <span></span>
+                    <span></span>
+                    <div class="card-list-pad_top pad-top"></div>
+                    <div class="display card-list-pad_display">
+                        <div class="index-msg-container">
+                            <h3>Trust and integrity:</h3>
+                            <p>Our bank is committed to building and maintaining trust with our customers. We understand that our customers entrust us with their hard-earned money and sensitive personal information, and we take that responsibility seriously. That's why we adhere to the highest standards of transparency and ethical behavior, with clear policies and procedures in place to protect customer data and privacy.</p>
+                        </div>
+                    </div>
+                    <div class="card-list-pad_bot pad-bot"></div>
+                </div>
+            </template>
+            <template v-if="calcWidth()">
+                <div class="message-pad">
+                    <div class="message-pad-hardware">
+                        <div class="message-pad_charge-bar-counterpart"></div>
+                        <div class="message-pad_charge-bar-mark"></div>
+                        <div class="message-pad_charge-bar"></div>
+                        <div class="message-pad-hardware_mid">
+                            <div class="message-pad_light-container">
+                                <span class="message-pad-light left-light"></span>
+                                <span class="message-pad-light top-light"></span>
+                                <span class="message-pad-light right-light"></span>
+                                <span class="message-pad-light bottom-light"></span>
+                            </div>
+                            <div class="message-pad-hardware_inner"></div>
+                        </div>
+                    </div>
+                    <div class="message-pad-hardware_arm-container">
+                        <div class="message-pad-hardware_arm">
+                            <div class="display message-pad-display">
+                                <div class="index-msg-container">
+                                    <h3>Innovation and adaptability:</h3>
+                                    <p>The banking industry is constantly evolving, and we're dedicated to staying ahead of the curve. We leverage the latest technology and industry best practices to ensure that our customers have access to the most cutting-edge services and offerings. We understand that our customers' needs and preferences are constantly changing, and we're always looking for new ways to meet those needs and exceed their expectations.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </template>
+            <template v-else>
+                <div class="card-list-pad">
+                    <span></span>
+                    <span></span>
+                    <div class="card-list-pad_top pad-top"></div>
+                    <div class="display card-list-pad_display">
+                        <div class="index-msg-container">
+                            <h3>Trust and integrity:</h3>
+                            <p>Our bank is committed to building and maintaining trust with our customers. We understand that our customers entrust us with their hard-earned money and sensitive personal information, and we take that responsibility seriously. That's why we adhere to the highest standards of transparency and ethical behavior, with clear policies and procedures in place to protect customer data and privacy.</p>
+                        </div>
+                    </div>
+                    <div class="card-list-pad_bot pad-bot"></div>
+                </div>
+            </template>
+            <template v-if="calcWidth()">
+                <div class="message-pad message-pad-right">
+                    <div class="message-pad-hardware">
+                        <div class="message-pad_charge-bar-counterpart"></div>
+                        <div class="message-pad_charge-bar-mark"></div>
+                        <div class="message-pad_charge-bar message-pad_charge-bar-right"></div>
+                        <div class="message-pad-hardware_mid">
+                            <div class="message-pad_light-container message-pad_light-container-right">
+                                <span class="message-pad-light left-light"></span>
+                                <span class="message-pad-light top-light"></span>
+                                <span class="message-pad-light right-light"></span>
+                                <span class="message-pad-light bottom-light"></span>
+                            </div>
+                            <div class="message-pad-hardware_inner"></div>
+                        </div>
+                    </div>
+                    <div class="message-pad-hardware_arm-container message-pad-hardware_arm-container-right">
+                        <div class="message-pad-hardware_arm message-pad-hardware_arm-right">
+                            <div class="display message-pad-display message-pad-display-right">
+                                <div class="index-msg-container">
+                                    <h3>Security and protection:</h3>
+                                    <p>We take the security and protection of our customers' accounts and personal information very seriously. We have robust cybersecurity measures in place to prevent unauthorized access and fraud, including encryption, two-factor authentication, and continuous monitoring. We also have policies and procedures in place to ensure that our customers' personal information is kept confidential and secure at all times.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template v-else>
+                <div class="card-list-pad">
+                    <span></span>
+                    <span></span>
+                    <div class="card-list-pad_top pad-top"></div>
+                    <div class="display card-list-pad_display">
+                        <div class="index-msg-container">
+                            <h3>Trust and integrity:</h3>
+                            <p>Our bank is committed to building and maintaining trust with our customers. We understand that our customers entrust us with their hard-earned money and sensitive personal information, and we take that responsibility seriously. That's why we adhere to the highest standards of transparency and ethical behavior, with clear policies and procedures in place to protect customer data and privacy.</p>
+                        </div>
+                    </div>
+                    <div class="card-list-pad_bot pad-bot"></div>
+                </div>
+            </template>
+            <template v-if="calcWidth()">
+                <div class="message-pad">
+                    <div class="message-pad-hardware">
+                        <div class="message-pad_charge-bar-counterpart"></div>
+                        <div class="message-pad_charge-bar-mark"></div>
+                        <div class="message-pad_charge-bar"></div>
+                        <div class="message-pad-hardware_mid">
+                            <div class="message-pad_light-container">
+                                <span class="message-pad-light left-light"></span>
+                                <span class="message-pad-light top-light"></span>
+                                <span class="message-pad-light right-light"></span>
+                                <span class="message-pad-light bottom-light"></span>
+                            </div>
+                            <div class="message-pad-hardware_inner"></div>
+                        </div>
+                    </div>
+                    <div class="message-pad-hardware_arm-container">
+                        <div class="message-pad-hardware_arm">
+                            <div class="display message-pad-display">
+                                <div class="index-msg-container">
+                                    <h3>Comprehensive Crypto Services:</h3>
+                                    <p>Our bank offers a range of comprehensive crypto services, including secure storage, portfolio tracking, and lightning-fast transactions. We make it easy for our customers to buy, sell, and manage their digital assets all in one place.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template v-else>
+                <div class="card-list-pad">
+                    <span></span>
+                    <span></span>
+                    <div class="card-list-pad_top pad-top"></div>
+                    <div class="display card-list-pad_display">
+                        <div class="index-msg-container">
+                            <h3>Trust and integrity:</h3>
+                            <p>Our bank is committed to building and maintaining trust with our customers. We understand that our customers entrust us with their hard-earned money and sensitive personal information, and we take that responsibility seriously. That's why we adhere to the highest standards of transparency and ethical behavior, with clear policies and procedures in place to protect customer data and privacy.</p>
+                        </div>
+                    </div>
+                    <div class="card-list-pad_bot pad-bot"></div>
+                </div>
+            </template>
+            <template v-if="calcWidth()">
+                <div class="message-pad message-pad-right">
+                    <div class="message-pad-hardware">
+                        <div class="message-pad_charge-bar-counterpart"></div>
+                        <div class="message-pad_charge-bar-mark"></div>
+                        <div class="message-pad_charge-bar message-pad_charge-bar-right"></div>
+                        <div class="message-pad-hardware_mid">
+                            <div class="message-pad_light-container message-pad_light-container-right">
+                                <span class="message-pad-light left-light"></span>
+                                <span class="message-pad-light top-light"></span>
+                                <span class="message-pad-light right-light"></span>
+                                <span class="message-pad-light bottom-light"></span>
+                            </div>
+                            <div class="message-pad-hardware_inner"></div>
+                        </div>
+                    </div>
+                    <div class="message-pad-hardware_arm-container message-pad-hardware_arm-container-right">
+                        <div class="message-pad-hardware_arm message-pad-hardware_arm-right">
+                            <div class="display message-pad-display message-pad-display-right">
+                                <div class="index-msg-container">
+                                    <h3>Integration with Traditional Banking Services:</h3>
+                                    <p>Bridging the Gap Between Traditional and Digital Finance
+                                        Text: We understand that cryptocurrencies are still a new asset class, which is why we strive to bridge the gap between traditional banking and digital assets. Our crypto platform is seamlessly integrated with our traditional banking services, making it easy for customers to manage all of their financial assets in one place. This integration allows our customers to easily transfer funds between their traditional bank accounts and their crypto accounts.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template v-else>
+                <div class="card-list-pad">
+                    <span></span>
+                    <span></span>
+                    <div class="card-list-pad_top pad-top"></div>
+                    <div class="display card-list-pad_display">
+                        <div class="index-msg-container">
+                            <h3>Trust and integrity:</h3>
+                            <p>Our bank is committed to building and maintaining trust with our customers. We understand that our customers entrust us with their hard-earned money and sensitive personal information, and we take that responsibility seriously. That's why we adhere to the highest standards of transparency and ethical behavior, with clear policies and procedures in place to protect customer data and privacy.</p>
+                        </div>
+                    </div>
+                    <div class="card-list-pad_bot pad-bot"></div>
+                </div>
+            </template>
         </div>
 
         
@@ -283,6 +432,21 @@
         </div>
         
     </main>
-    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <span class="navbar-brand"><span>MindhuB</span><span>BrotherS</span></span>
+            </div>
+            <div class="footer-text">
+                <p>Contact Us:</p>
+                <ul>
+                    <li>Phone: 123-456-7890</li>
+                    <li>Email: mhbrothers@info.com</li>
+                    <li>Address: 123 Main St, City, State ZIP</li>
+                </ul>
+            </div>
+        </div>
+        <p>&copy; 2023 Mindhub Brothers. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>

@@ -4,9 +4,13 @@ createApp({
     data() {
         return {
             data:null,
-            cardType:"",
-            cardColor:"",
-            createCardErrMsg:"",
+            loans:[],
+            activeLoan:null,
+            activeAccount:null,
+            accounts:[],
+            amount:"",
+            payPerIndex:"",
+            loanErrMsg:"",
         }
     },
     created(){
@@ -14,9 +18,28 @@ createApp({
     },
     methods:{
         loadData(){
-            axios.get(`http://localhost:8080/api/clients/current`)
+            axios.get(`/api/clients/current`)
             .then(res=>{
                 this.data=res;
+                this.accounts=res.data.accounts;
+            })
+            axios.get(`/api/loans`)
+            .then(res=>{
+                this.loans=res.data;
+            })
+        },
+        requestLoan(){
+            axios.post("/api/loans",{
+                "loanId":this.activeLoan.id,
+                "amount":this.amount,
+                "payments":this.activeLoan.payments[this.payPerIndex],
+                "accountNumber":`${this.activeAccount}`
+            })
+            .then(res=>{
+                window.location.assign("/web/accounts.html");
+            })
+            .catch(err=>{
+                this.loanErrMsg=err.response.data;
             })
         },
         openNav() {
@@ -42,15 +65,15 @@ createApp({
             })
             
         },
-        createCard(){
-            axios.post("/api/clients/current/cards",`cardType=${this.cardType}&cardColor=${this.cardColor}`)
-            .then(res=>{
-                console.log("Card Created")
-                window.location.href = '/web/accounts.html';
-            })
-            .catch(err=>{
-                this.createCardErrMsg=err.response.data;
-            })
+        formatCurrency(amount){
+            let options = { style: 'currency', currency: 'USD' };
+            let numberFormat = new Intl.NumberFormat('en-US', options);
+            return numberFormat.format(amount);
+        },
+        resetValues(){
+            this.amount="";
+            this.payPerIndex="";
+            this.activeAccount=null;
         },
     },
     computed:{

@@ -1,7 +1,11 @@
 package com.mindhub.homebanking.controllers;
 
+import com.mindhub.homebanking.Services.AccountService;
+import com.mindhub.homebanking.Services.ClientService;
 import com.mindhub.homebanking.dtos.ClientDTO;
+import com.mindhub.homebanking.dtos.ClientFullDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
@@ -22,22 +26,23 @@ import static java.util.stream.Collectors.toList;
 @RestController
 public class ClientController {
     @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
-    private AccountRepository accountRepository;
-    @Autowired
     private PasswordEncoder passwordEncoder;
-    @RequestMapping(path="/clients")
-    public List<ClientDTO> getClients(){
-        return clientRepository.findAll().stream().map(ClientDTO::new).collect(toList());
+    @Autowired
+    private ClientService clientService;
+    @Autowired
+    private AccountService accountService;
+
+    @GetMapping(path="/clients")
+    public List<ClientFullDTO> getClients(){
+        return clientService.findAll().stream().map(ClientFullDTO::new).collect(toList());
     }
-    @RequestMapping(path="/clients/{id}")
-    public ClientDTO getClient(@PathVariable Long id){
+    @GetMapping(path="/clients/{id}")
+    public ClientFullDTO getClient(@PathVariable Long id){
         //Esta deprecado pero no se de que otra forma hacerlo
 //        return clientRepository.getById(id).map(ClientDTO::new).orElse(null);
-        return clientRepository.findById(id).map(ClientDTO::new).orElse(null);
+        return clientService.findById(id).map(ClientFullDTO::new).orElse(null);
     }
-    @RequestMapping(path = "/clients", method = RequestMethod.POST)
+    @PostMapping(path = "/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password,
@@ -67,34 +72,34 @@ public class ClientController {
         if (!emailValidation(email)) {
             return new ResponseEntity<>("Invalid email format", HttpStatus.BAD_REQUEST);
         }
-        if (clientRepository.findByEmail(email) !=  null) {
+        if (clientService.findByEmail(email) !=  null) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
         if (!userNameValidation(userName)) {
             return new ResponseEntity<>("Invalid username format", HttpStatus.BAD_REQUEST);
         }
-        if (clientRepository.findByUserName(userName) !=  null) {
+        if (clientService.findByUserName(userName) !=  null) {
             return new ResponseEntity<>("Username already in use", HttpStatus.FORBIDDEN);
         }
         if (!phoneNumberValidation(phoneNumber)) {
             return new ResponseEntity<>("Invalid phone number format", HttpStatus.BAD_REQUEST);
         }
-        if (clientRepository.findByPhoneNumber(phoneNumber) !=  null) {
+        if (clientService.findByPhoneNumber(phoneNumber) !=  null) {
             return new ResponseEntity<>("Phone number already in use", HttpStatus.FORBIDDEN);
         }
         Client client= new Client(firstName, lastName, email, passwordEncoder.encode(password),userName,phoneNumber);
-        clientRepository.save(client);
-        Account account=new Account("", LocalDateTime.now(),0);
-        accountRepository.save(account);
+        clientService.save(client);
+        Account account=new Account(AccountType.SAVINGS,"", LocalDateTime.now(),0);
+        accountService.save(account);
         account.setNumber(accountNumberGenerator(account));
         client.addAccount(account);
-        accountRepository.save(account);
-        clientRepository.save(client);
+        accountService.save(account);
+        clientService.save(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @RequestMapping("/clients/current")
+    @GetMapping("/clients/current")
     public ClientDTO getCurrent(Authentication authentication) {
-        System.out.println(authentication.getName());
-        return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
+//        System.out.println(authentication.getName());
+        return new ClientDTO(clientService.findByEmail(authentication.getName()));
     }
 }

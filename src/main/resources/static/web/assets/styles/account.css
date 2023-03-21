@@ -1,0 +1,200 @@
+.print-container{
+    display: none;
+}
+.print-content{
+    padding: 1rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.print-date{
+    color: black;
+    align-self: flex-end;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+}
+.page_footer{
+    margin-top: 5rem;
+    color: black;
+    font-size: .7rem;
+    border: 1px solid #888;
+    padding: 1rem;
+}
+.title-container-home{
+    margin-top: 0rem;
+}
+.title-container-home h1{
+    width: 45rem;
+    animation: none;
+    position: relative;
+    padding: 0 3.5rem;
+    color: #888;
+}
+.title-word-container-home{
+    position: relative;
+    width: fit-content; 
+}
+
+.title-word-container-home span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+}
+.title-word-container-home span:first-child{
+    display: none;
+    animation: none;
+}
+.title-word-container-home span:last-child{
+    display: none;
+    animation: none;
+}
+.t-first-home{
+    position: absolute;
+    top: -.8em;
+    right: 50%;
+    translate: 50% 0;
+}
+.t-second-home{
+    letter-spacing: .8em;
+    font-size: 3.5rem;
+    /* width: 3rem; */
+}
+.print-account-details{
+    text-align: center;
+    margin: 2rem 0;
+    border: 2px solid #888;
+    padding: .5rem 3rem;
+    color: black;
+    font-weight: bolder;
+}
+.print-content table{
+    width: 100%;
+    background: #ccc;
+    border: 3px solid #888;
+    color: black;
+    border-collapse: collapse;
+    z-index: 2;
+    margin: 0;
+}
+
+.print-content table *{
+    border: 1px solid #888;
+    padding: .3rem .6rem;
+}
+.print-content tbody{
+    background: #ddd;
+}
+.print-content tbody tr:nth-child(2n+1){
+    background-color: #eee;
+}
+.pdf-icon-container{
+    background: #09183355;
+    padding: 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    border: 3px solid var(--green);
+    transition: all .3s;
+}
+.pdf-icon{
+    color: var(--green);
+    transition: all .3s;
+}
+.pdf-icon-container:hover{
+    border-color: #9fffd4;
+    box-shadow: 0 0 1rem var(--green);
+}
+.pdf-icon-container:hover .pdf-icon{
+    color: #9fffd4;
+    filter: drop-shadow(0px 0px 1rem var(--green));
+}
+.card-list-pad{
+    /* width: auto; */
+    margin-top: 3rem;
+}
+.card-list-pad_display{
+    overflow: hidden;
+    min-height: 0px;
+    max-height: 0px;
+    animation: msg-display-start 5s forwards,
+    section-open-glitch 1s forwards,
+    section-open-glitch-shadow 1s forwards;
+}
+@keyframes msg-display-start {
+    to{
+        min-height: 0rem;
+        max-height: 200rem;
+    }
+}
+.movements-container{
+    background-color: #442c8877;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+.movements-table{
+    border: 3px solid var(--green);
+    border-collapse: collapse;
+    color: var(--green);
+    font-weight: bolder;
+    width: 96%;
+    margin: 0 auto;
+}
+.movements-table *{
+    padding: .3rem .6rem;
+    border: 1px solid var(--green);
+    background-color: #09183355;
+}
+.date-filter{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.date-filter label{
+    display: flex;
+    flex-direction: column;
+    color: var(--green);
+    font-weight: bolder;
+    font-size: 1.3rem;
+    flex-wrap: wrap;
+}
+input{
+    background-color: #09183355;
+    color: var(--green);
+    border: 2px solid var(--green);
+    padding: .3rem .5rem;
+    font-weight: bolder;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+.filter-button{
+    width: 10rem;
+    align-self: flex-end;
+    margin: 0;
+    padding: .3rem .5rem;
+    font-weight: bolder;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+.table-container{
+    width: 100%;
+}
+/* .CREDIT *{
+    background-color: #13f48f55;
+    color: var(--green);
+} */
+/* .DEBIT *{
+    background-color: #f4137555;
+    color: var(--pink);
+} */
+@media (max-width:900px) {
+    .movements-table *{
+        font-size: .7rem;
+    }
+    .table-container{
+        overflow-x: scroll;
+    }
+    
+}

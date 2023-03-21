@@ -6,21 +6,18 @@ createApp({
             data:null,
             clientId:1,
             accounts:[],
+            createType:"",
             loans:[],
             userAvatar:null,
             activeAccount:{},
+            coins:[],
+            accountCoins:[],
+            accountCoinsGeneric:[],
+            filteredCoins:[],
         }
     },
     created(){
         this.loadData();
-    },
-    mounted(){
-        // this.asd();
-        // console.log(this.accounts)
-    },
-    updated(){
-        // this.accNumber();
-        // this.loadCharts("chart0");
     },
     methods:{
         asd(){
@@ -36,7 +33,18 @@ createApp({
                 this.accounts=res.data.accounts;
                 this.loans=res.data.loans;
                 this.openCarousel();
-                // this.loadCharts();
+                if(this.accounts.some(account=> account.type==="CRYPTO")){
+                    axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+                    .then(res=>{
+                        this.coins=res.data;
+                        this.accountCoins=this.accounts.find(account=> account.type==="CRYPTO")
+                        .coins;
+                        this.accountCoinsGeneric=this.coins.filter(coin=>{
+                            return this.accounts.find(account=> account.type==="CRYPTO")
+                            .coins.some(co=> co.coinId===coin.id);
+                        })
+                    })
+                }
             })
         },
         parseDate(date){
@@ -52,31 +60,15 @@ createApp({
             this.activeAccount.number=account.number;
             this.activeAccount.date=account.currentDate;
         },
-        // loadCharts(id){
-        //     // console.log("asdasdasdasd")
-        //     // console.log(id)
-        //     let options = {
-        //         chart: {
-        //           type: 'line'
-        //         },
-        //         series: [{
-        //           name: 'Balance',
-        //           data: [30,40,35,50,49,60,70,91,125,50,200,20]
-        //         }],
-        //         xaxis: {
-        //           categories: ["Ja","Fe","Ma","Ap","May","Jun","Jul","Au","Se","Oc","No","Di"]
-        //         }
-        //       }
-        //     //   console.log(options)
-        //       let dir=document.querySelector(`#${id}`);
-        //       console.log(dir)
-        //     //   if (dir){
-        //           var chart = new ApexCharts(dir, options);
-        //           chart.render();
-        //     // //   }
-        //     // console.log(dir)
-              
-        // },
+        setActiveAccount(account){
+            this.activeAccount=account;
+        },
+        deleteAccount(){
+            axios.delete(`/api/clients/current/accounts?accountNumber=${this.activeAccount.number}`)
+            .then(res=>{
+                window.location.reload();
+            })
+        },
         openNav() {
             let container=document.querySelector(".lateral-navigation-subcontainer");
             if (window.innerWidth>768){
@@ -113,7 +105,7 @@ createApp({
                     0 0 2rem cyan, 0px 15px 10px -10px white inset
                     , 0 0 2rem cyan, 0px -15px 10px -10px white inset`);
                     display.forEach(elem=>{
-                        elem.style.maxHeight="100vh";
+                        elem.style.maxHeight="200rem";
                         elem.style.minHeight="25rem";
                         elem.style.opacity="1";
                     })
@@ -141,7 +133,7 @@ createApp({
             
         },
         createAccount(){
-            axios.post("/api/clients/current/accounts")
+            axios.post(`/api/clients/current/accounts?type=${this.createType}`)
             .then(res=>{
                 window.location.reload()
             })

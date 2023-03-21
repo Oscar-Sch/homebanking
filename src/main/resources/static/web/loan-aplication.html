@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link rel="stylesheet" href="./assets/styles/index.css">
+    <link rel="stylesheet" href="./assets/styles/cards.css">
+    <link rel="stylesheet" href="./assets/styles/transactions.css">
+    <link rel="stylesheet" href="./assets/styles/loan-aplication.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://kit.fontawesome.com/131d9c1f34.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script defer src="./assets/scripts/loan-aplication.js"></script>
+    <title>Mindhub Brothers | Loans</title>
+</head>
+<body id="app">
+    <header>
+        <nav class="navbar navbar-expand-md">
+            <div class="container">
+                <span class="navbar-brand"><span>MindhuB</span><span>BrotherS</span></span>                <button class="navbar-toggler custom-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0 d-flex flex-column align-items-center">
+                        <li class="nav-item"><a href="./accounts.html">ACCOUNTS</a></li>
+                        <li class="nav-item"><a href="./transactions.html">TRANSFER</a></li>
+                        <li class="nav-item"><a href="#">LOANS</a></li>
+                        <li class="nav-item"><a href="./cards.html">CARDS</a></li>
+                        <li class="nav-item"><a href="./create-cards.html">NEW CARDS</a></li>
+                        <li class="nav-item"><a href="" data-bs-toggle="modal" data-bs-target="#modalLogin">LOGOUT</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>        
+    </header>
+    <main>
+        <div class="main-content-container d-flex">
+            <div class="lateral-navigation-container">
+                <div class="lateral-navigation-subcontainer">
+                    <nav class="sidenav">
+                        <ul>
+                            <li><a href="" class="sidenav-user">
+                                <span v-if="data"><img :src="'https://robohash.org/'+hashUser" class="user-image"></span>
+                                <span v-else><i class="fa-solid fa-user"></i></span>
+                                <span>{{data.data.firstName}} {{data.data.lastName}}</span></a></li>
+                                <!-- <button @click="sesionLogout()">Logout!</button> -->
+                            <div>
+                            <li><a href="./accounts.html"><span class="sidenav-icon-span"><i class="fa-solid fa-wallet fa-lg"></i></span><span>ACCOUNTS</span></a></li>
+                            <li><a href="./transactions.html"><span class="sidenav-icon-span"><i class="fa-solid fa-money-bill-transfer fa-lg"></i></span><span>TRANSFER</span></a></li>
+                            <li><a href="#"><span class="sidenav-icon-span"><i class="fa-solid fa-coins fa-lg"></i></span><span>LOANS</span></a></li>
+                            <li><a href="./cards.html"><span class="sidenav-icon-span"><i class="fa-solid fa-credit-card fa-lg"></i></span><span>CARDS</span></a></li>
+                            <li><a href="./create-cards.html"><span class="sidenav-icon-span"><i class="fa-regular fa-credit-card fa-lg"></i></span><span>NEW CARDS</span></a></li>
+                            </div>
+                            <li><a href="" data-bs-toggle="modal" data-bs-target="#modalLogin"><span class="sidenav-icon-span"><i class="fa-solid fa-right-from-bracket fa-lg"></i></span><span>LOGOUT</span></a></li>
+                        </ul>
+                    </nav>
+                    <span @click="openNav()">Menu</span>
+                </div>
+            </div>
+            <div class="main-content-subcontainer">
+                <div class="title-container">
+                    <h1 class="title-header"><span class="title-word-container t-first"><span aria-hidden="true">New</span> New<span aria-hidden="true">New</span></span>
+                    <span class="title-word-container t-second"><span aria-hidden="true">Loan</span> Loan<span aria-hidden="true">Loan</span></span>
+                    </h1>
+                </div>
+                <div class="card-list-pad">
+                    <span></span>
+                    <span></span>
+                    <div class="card-list-pad_top pad-top"></div>
+                    <div class="display card-list-pad_display">
+                        <div v-if="data.data.loans" id="carouselLoans" class="carousel slide carousel-loans" data-bs-ride="carousel">
+                            <h3>Active Loans</h3>
+                            <ol class="carousel-indicators">
+                                <template v-for="(loan,index) of data.data.loans">
+                                    <template v-if="index===0">
+                                        <li data-bs-target="#carouselLoans" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+                                    </template>
+                                    <template v-else>
+                                        <li data-bs-target="#carouselLoans" :data-bs-slide-to="index" :aria-label="index+' slide'"></li>
+                                    </template>
+                                </template>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <div v-for="(loan,index) of data.data.loans" :class="index===0?'carousel-item active':'carousel-item'">
+                                    <h4>{{loan.name}}</h4>
+                                    <p>Requested amount: {{formatCurrency(loan.amount)}}</p>
+                                    <p>Financed in {{loan.payments}} of {{formatCurrency(loan.amount/loan.payments)}}</p>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselLoans" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon carousel-icon" aria-hidden="true">&lt;</span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselLoans" data-bs-slide="next">
+                                <span class="carousel-control-next-icon carousel-icon" aria-hidden="true">&gt;</span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <div class="loan-section">
+                            <h3>Loan Request</h3>
+                            <div class="loan-section-flex">
+                                <div class="loan-details">
+                                    <label>
+                                        <h4>Pre-approved loans</h4>
+                                        <div class="select">
+                                            <select name="loans" v-model="activeLoan" @change="resetValues()">
+                                                <option v-for="loan of loans" :value="loan">{{loan.name}}</option>
+                                            </select>
+                                        </div>
+                                    </label>
+                                    <!-- <div class="d-flex justify-content-between"> -->
+                                        <label>
+                                            <h4>Amount requested:</h4>
+                                            <input type="number" name="amount" v-model="amount">
+                                        </label>
+                                        <div>
+                                            <h4>Maximum amount:</h4>
+                                            <p v-if="activeLoan" class="m-0">{{formatCurrency(activeLoan.maxAmount)}}</p>
+                                        </div>
+                                    <!-- </div> -->
+                                    <!-- <div class="d-flex justify-content-between"> -->
+                                        <label>
+                                            <h4>Payments:</h4>
+                                            <div class="select">
+                                                <select name="payments" v-model="payPerIndex">
+                                                    <option v-if="activeLoan" v-for="(payment,index) of activeLoan.payments" :value="index">{{payment}}</option>
+                                                </select>
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <h4>Account:</h4>
+                                            <div class="select">
+                                                <select name="account" v-model="activeAccount">
+                                                    <option v-for="account of accounts.filter(acc=>acc.type!='CRYPTO')" :value="account.number">{{account.number}}</option>
+                                                </select>
+                                            </div>
+                                        </label>
+                                        <div>
+                                            <h4>Payment details:</h4>
+                                            <div v-if="activeLoan && amount && payPerIndex!=='' && activeAccount">
+                                                <p><b><u>{{formatCurrency(amount)}}</u></b> requested by <b><u>{{activeAccount}}</u></b></p>
+                                                <p>{{activeLoan.payments[payPerIndex]}} payments 
+                                                    of {{formatCurrency(amount*(1+(activeLoan.percentages[payPerIndex]/100))/activeLoan.payments[payPerIndex])}}</p>
+                                                <p>Interest rate of <b><u>%{{activeLoan.percentages[payPerIndex]}}</u></b></p>
+                                            </div>
+                                        </div>
+                                        <p class="register-error-msg" v-show="loanErrMsg">{{loanErrMsg}}</p>
+                                        <template v-if="activeLoan && amount && payPerIndex!==''&& activeAccount">
+                                            <button data-bs-toggle="modal" data-bs-target="#modalLoan" class="btn-signIn">Apply</button>
+                                        </template>
+                                        <template v-else>
+                                            <button disabled class="btn-signIn">Apply</button>
+                                        </template>
+                                    <!-- </div> -->
+                                </div>
+                                <div class="loan-text">
+                                    <template v-if="activeLoan && activeLoan.id==1">
+                                        <p>
+                                            Are you tired of paying rent and want to invest in your future? Do you dream of owning your own home? Let us help make that dream a reality with our competitive mortgage options!
+                                        </p>
+                                        <p>
+                                            Our mortgages offer low interest rates, flexible terms, and a range of repayment options to fit your unique needs and budget. Our experienced mortgage specialists will work with you every step of the way, from pre-approval to closing, to ensure a smooth and hassle-free process.
+                                        </p>
+                                        <p>
+                                            Plus, owning a home has numerous benefits, including building equity, tax deductions, and the pride of homeownership. Don't let high rents and limited housing options hold you back from achieving your goals. Let us help you take the first step towards a brighter future with our affordable and accessible mortgages. Contact us today to learn more!
+                                        </p>
+                                    </template>
+                                    <template v-else-if="activeLoan && activeLoan.id==2">
+                                        <p>
+                                            Do you have a big purchase or unexpected expense coming up and need extra cash? Or maybe you want to consolidate debt or make home improvements? Let us help you achieve your goals with our flexible and affordable personal loans!
+                                        </p>
+                                        <p>
+                                            Our personal loans offer competitive interest rates, flexible repayment terms, and no collateral requirements, making them a great option for a variety of financial needs. Whether you need a small loan or a larger sum, our experienced loan specialists will work with you to find a loan that fits your budget and goals.
+                                        </p>
+                                        <p>
+                                            Our fast and easy online application process means you can get approved quickly and have the funds you need in your account in no time. Plus, making timely payments on your personal loan can help improve your credit score and give you more financial freedom in the long run.
+                                        </p>
+                                        <p>
+                                            Don't let unexpected expenses or financial goals hold you back. Let us help you achieve your dreams with our affordable and accessible personal loans. Contact us today to learn more!
+                                        </p>
+                                    </template>
+                                    <template v-else-if="activeLoan && activeLoan.id==3">
+                                        <p>
+                                            Are you in the market for a new car or truck, but don't want to drain your savings account? Let us help you get behind the wheel with our competitive automotive loans!
+                                        </p>
+                                        <p>
+                                            Our automotive loans offer low interest rates, flexible repayment terms, and easy online application processes to make getting the car or truck of your dreams a reality. Whether you're in the market for a brand new vehicle or a reliable used car, we've got you covered.
+                                        </p>
+                                        <p>
+                                            Our experienced loan specialists will work with you to customize a loan that fits your unique needs and budget, and our fast approval process means you can hit the road in no time. Plus, financing your vehicle with us means you'll have the peace of mind of working with a trusted and reliable lender.
+                                        </p>
+                                        <p>
+                                            Don't let the cost of a new or used car hold you back from getting the transportation you need. Contact us today to learn more about our automotive loans and how we can help you hit the road in style!
+                                        </p>
+                                    </template>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="card-list-pad_bot pad-bot"></div>
+                </div>
+            </div>  
+        </div>
+        
+        <div class="modal fade" id="modalLoan" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered login-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header card-pad_top">
+                            <button type="button" class="close-modal" data-bs-dismiss="modal" aria-label="Close"><i class="fa-sharp fa-solid fa-xmark fa-2xl"></i></button>
+                    </div>
+                    <div class="display modal-body logout-display">
+                        <div class="overflow-container">
+                            <div class="pad-contrast-container">
+                                <h3>Are you sure?</h3>
+                                <div>
+                                    <button class="btn-signIn" @click="requestLoan()" data-bs-dismiss="modal" aria-label="Close">Get Loan</button>
+                                    <button class="btn-signUp" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer card-pad_bot">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalLogin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered login-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header card-pad_top">
+                            <button type="button" class="close-modal" data-bs-dismiss="modal" aria-label="Close" @click="singUpTransitionClear()"><i class="fa-sharp fa-solid fa-xmark fa-2xl"></i></button>
+                    </div>
+                    <div class="display modal-body logout-display">
+                        <div class="overflow-container">
+                            <div class="pad-contrast-container">
+                                <h3>Are you sure?</h3>
+                                <div>
+                                    <button class="btn-signIn" @click="sesionLogout()">Logout</button>
+                                    <button class="btn-signUp" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer card-pad_bot">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <span class="navbar-brand"><span>MindhuB</span><span>BrotherS</span></span>
+            </div>
+            <div class="footer-text">
+                <p>Contact Us:</p>
+                <ul>
+                    <li>Phone: 123-456-7890</li>
+                    <li>Email: mhbrothers@info.com</li>
+                    <li>Address: 123 Main St, City, State ZIP</li>
+                </ul>
+            </div>
+        </div>
+        <p>&copy; 2023 Mindhub Brothers. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,11 +1,12 @@
 package com.mindhub.homebanking.models;
 
-import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,20 +17,26 @@ public class Account {
     private long id;
     private String number;
     private LocalDateTime creationDate;
-    private double balance;
+    private Double balance;
+    private Boolean active;
+    private AccountType type;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id")
     private Client client;
 
     @OneToMany(mappedBy="account", fetch=FetchType.EAGER)
     Set<Transaction> transactions = new HashSet<>();
+    @OneToMany(mappedBy="account", fetch=FetchType.EAGER)
+    List<Coin> coins =new ArrayList<>();
 
     public Account() {}
 
-    public Account(String number, LocalDateTime creationDate, double balance) {
+    public Account(AccountType type,String number, LocalDateTime creationDate, double balance) {
+        this.type=type;
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
+        this.active =true;
     }
 
     public String getNumber() {
@@ -48,14 +55,6 @@ public class Account {
         this.creationDate = creationDate;
     }
 
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
     public Client getClient() {
         return client;
     }
@@ -68,9 +67,45 @@ public class Account {
         return id;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public List<Coin> getCoins() {
+        return coins;
+    }
+
+    public void setCoins(List<Coin> coins) {
+        this.coins = coins;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public AccountType getType() {
+        return type;
+    }
+
+    public void setType(AccountType type) {
+        this.type = type;
+    }
+
     public void addTransaction(Transaction transaction){
         transaction.setAccount(this);
         this.transactions.add(transaction);
+    }
+    public void addCoin(Coin coin){
+        coin.setAccount(this);
+        this.coins.add(coin);
     }
 
     public Set<Transaction> getTransactions() {
