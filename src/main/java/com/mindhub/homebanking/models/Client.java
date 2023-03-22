@@ -16,11 +16,11 @@ public class Client {
     private long id;
     private String firstName,lastName,email,password,userName,phoneNumber;
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
-    Set<Account> accounts = new HashSet<>();
+    private Set<Account> accounts = new HashSet<>();
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
-    Set<ClientLoan> clientLoans= new HashSet<>();
+    private Set<ClientLoan> clientLoans= new HashSet<>();
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
-    Set<Card> cards= new HashSet<>();
+    private Set<Card> cards= new HashSet<>();
     public Client(){}
     public Client(String first, String last, String mail, String password, String userName, String phoneNumber){
         this.firstName=first;
