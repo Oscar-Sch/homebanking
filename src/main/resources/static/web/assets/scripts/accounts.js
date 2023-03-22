@@ -27,7 +27,7 @@ createApp({
             });
         },
         loadData(){
-            axios.get(`http://localhost:8080/api/clients/current`)
+            axios.get(`/api/clients/current`)
             .then(res=>{
                 this.data=res;
                 this.accounts=res.data.accounts;

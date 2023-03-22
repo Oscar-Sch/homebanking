@@ -17,7 +17,7 @@ createApp({
     },
     methods:{
         loadData(){
-            axios.get("http://localhost:8080/api/clients")
+            axios.get("/api/clients")
             .then(res=>{
                 this.data=res;
                 this.clientList=res.data;
@@ -25,7 +25,7 @@ createApp({
             })
         },
         postClient(){
-            axios.post("http://localhost:8080/api/clients",
+            axios.post("/api/clients",
             {firstName:this.newClientData.firstName,
             lastName:this.newClientData.lastName,
             email:this.newClientData.email})
@@ -46,7 +46,7 @@ createApp({
         },
         editClient(){
             if (this.newClientData.firstName!==""&&this.newClientData.lastName!==""&&this.newClientData.email!==""){
-                axios.patch(`http://localhost:8080/api/clients/${this.newClientData.id}`,
+                axios.patch(`/api/clients/${this.newClientData.id}`,
                     {firstName:this.newClientData.firstName,
                     lastName:this.newClientData.lastName,
                     email:this.newClientData.email})
@@ -60,7 +60,7 @@ createApp({
             }
         },
         deleteClient(){
-            axios.delete(`http://localhost:8080/api/clients/${this.newClientData.id}`)
+            axios.delete(`/api/clients/${this.newClientData.id}`)
             .then(res=>{
                 this.stopEditing();
                 this.loadData();
