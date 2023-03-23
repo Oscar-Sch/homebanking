@@ -92,6 +92,13 @@ createApp({
                 });
             })
         },
+        sesionLogout(){
+            axios.post('/api/logout').then(response => {
+                console.log('signed out!!!')
+                window.location.href = '/web/index.html';
+            })
+            
+        },
     },
     computed:{
         hashUser(){

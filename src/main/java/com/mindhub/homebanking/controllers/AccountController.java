@@ -73,7 +73,10 @@ public class AccountController {
             return new ResponseEntity<>("This account doesn´t belongs to an authenticated client", HttpStatus.FORBIDDEN);
         }
         if (account.getBalance()>0){
-            return new ResponseEntity<>("This account still has a positive balance, transfer the money to other account before deleting it", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("This account still has a positive balance, transfer the money to another account before deleting it", HttpStatus.FORBIDDEN);
+        }
+        if (account.getBalance()<0){
+            return new ResponseEntity<>("This account has a negative balance, please contact us so we can solve your situation", HttpStatus.FORBIDDEN);
         }
         account.setActive(false);
         accountService.save(account);

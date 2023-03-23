@@ -45,6 +45,9 @@ public class TransactionController {
         if (amount.isNaN()) {
             return new ResponseEntity<>("Missing transaction amount", HttpStatus.FORBIDDEN);
         }
+        if (amount < 10.0) {
+            return new ResponseEntity<>("Insufficient amount", HttpStatus.FORBIDDEN);
+        }
         if (originAccountNumber.isEmpty()) {
             return new ResponseEntity<>("Missing origin account", HttpStatus.FORBIDDEN);
         }

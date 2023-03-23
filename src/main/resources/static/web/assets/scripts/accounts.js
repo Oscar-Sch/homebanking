@@ -14,6 +14,7 @@ createApp({
             accountCoins:[],
             accountCoinsGeneric:[],
             filteredCoins:[],
+            accountsErrMsg:"",
         }
     },
     created(){
@@ -67,6 +68,9 @@ createApp({
             axios.delete(`/api/clients/current/accounts?accountNumber=${this.activeAccount.number}`)
             .then(res=>{
                 window.location.reload();
+            })
+            .catch(err=>{
+                this.accountsErrMsg=err.response.data;
             })
         },
         openNav() {

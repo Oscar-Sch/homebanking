@@ -47,6 +47,9 @@ public class LoanController {
         if (loanAplicationDTO.getAmount() <= 1000) {
             return new ResponseEntity<>("Insufficient amount", HttpStatus.FORBIDDEN);
         }
+        if(client.getLoans().stream().anyMatch(loan1 -> loan1.getId()== loanAplicationDTO.getLoanId())){
+            return new ResponseEntity<>("You already have a loan of this type", HttpStatus.FORBIDDEN);
+        }
         if (loanAplicationDTO.getPayments()<=0) {
             return new ResponseEntity<>("Incorrect payments amount", HttpStatus.FORBIDDEN);
         }
