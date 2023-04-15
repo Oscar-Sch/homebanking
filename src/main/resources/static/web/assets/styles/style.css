@@ -960,7 +960,7 @@ h2 span{
 .loans-table,.last-transactions-table{
     margin: 0 auto;
     color: var(--green);
-    width: 80%;
+    width: 100%;
     text-align: center;
     background-color: #09183355;
 }
